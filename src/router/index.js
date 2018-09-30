@@ -1,10 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import views from './views';
+import test from '../views/test';
+
 Vue.use(Router);
 
 export default new Router({
   routes: [
-    ...views
+    {
+      path: '/',
+      name: 'test',
+      component: test
+    }
   ]
-})
+});
