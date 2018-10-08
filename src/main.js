@@ -6,6 +6,8 @@ import './main.css'
 new Vue({
   el: '#nav',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })
