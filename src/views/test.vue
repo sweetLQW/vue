@@ -16,7 +16,6 @@
     },
     created() {
       this.str = fun(this.str);
-      console.log(this.$axios);
       this.$axios.get('/aaaaa')
       .then(function (res) {
         console.log(res);
