@@ -1,5 +1,8 @@
-# vue
+## vue
 vue框架搭建及使用
+### 本地开发：npm run dev
+### 本地构建生产环境：npm run build
+#### 要点：
 1. vue(v2.5.17) + webpack(v4.20.2)
 2. 单入口文件
 3. css文件拆分出来 所有css都通过main.css引入
