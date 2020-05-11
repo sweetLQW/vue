@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-router 嵌套路由</title>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/a">go to A.page</router-link>
+        <br>
+        <router-link to="/a/children1">go to A-children1.page</router-link>
+        <br>
+        <router-link to="/a/children2">go to A-children2.page</router-link>
+        <br>
+
+        <h4>下面是路由页面</h4>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        const A = { template: "<div><h4>A page</h4><router-view></router-view></div>"};
+        const AChildren1 = { template: "<h4>A Children-1 page</h4>" };
+        const AChildren2 = { template: "<h4>A Children-2 page</h4>" };
+
+        const router = new VueRouter({
+            routes: [
+                // children用于嵌套路由
+                { 
+                    path: '/a', 
+                    component: A, 
+                    children: [
+                        {
+                            path: 'children1',
+                            component: AChildren1,
+                        },
+                        {
+                            path: 'children2',
+                            component: AChildren2,
+                        }
+                    ] 
+                }
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            router
+        })
+
+    </script>
+</body>
+</html>

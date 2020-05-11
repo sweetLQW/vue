@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue - 父组件监听子组件的生命周期钩子函数</title>
+</head>
+<body>
+    <div id="app">
+        <com-child @mounted="childMounted"></com-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var comChild = {
+            template: `<div class="child">子组件</div>`,
+            mounted: function() {
+                console.log('子组件的mounted已触发');
+                this.$emit('mounted');
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            components: {comChild},
+            methods: {
+                childMounted: function() {
+                    console.log('父组件监听到子组件的mounted了');
+                }
+            },
+            mounted: function() {
+                console.log('父组件的mounted已触发');
+            }
+        })
+    </script>
+</body>
+</html>

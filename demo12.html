@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li>ref 被用来给元素或子组件注册引用信息。</li>
+            <li>引用信息将会注册在父组件的 $refs 对象上。</li>
+            <li>如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素。</li>
+            <li>如果用在子组件上，引用就指向组件实例。</li>
+            <li>$refs需要在挂载完成后（mounted）访问。</li>
+            <li>$refs 也不是响应式的，因此你不应该试图用它在模板中做数据绑定。</li>
+            <li>子实例可以用 this.$parent 访问父实例，子实例被推入父实例的 $children 数组中。</li>
+            <li>需要注意$children、$parent不是响应式的。并且 $children 并不保证顺序。</li>
+        </ul>
+        <p ref="p"></p>
+        <com-child ref="child"></com-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var comChild = {
+            template: `<p></p>`,
+            data: function() {
+                return {
+                    childValue: 2
+                }
+            },
+            mounted: function() {
+                console.log('子组件中获取父组件的值：', this.$parent.value);
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            components: { comChild },
+            data: {
+                value: 1
+            },
+            mounted: function() {
+                var child = this.$children[0];
+                var childRef = this.$refs.child;
+                var p = this.$refs.p;
+                console.log('普通DOM元素元素', p);
+                console.log('父组件中获取子组件的值：', child.childValue, childRef.childValue);
+            }
+        })
+        
+    </script>
+</body>
+</html>

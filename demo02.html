@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue组件的应用</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li-item 
+                v-for="item in list" 
+                v-bind:text='item'>
+            </li-item>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('li-item', {
+            props: ['text'],
+            template: '<li>{{ text }}</li>'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [1, 2, 3, 4]
+            }
+        });
+    </script>
+</body>
+</html>

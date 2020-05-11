@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue - 监听某个属性值的变化</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ obj }}</p>
+        <button @click="changeData()">点击更改obj</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    name: 'lily',
+                    age: 25,
+                    list: [1, 2, 3]
+                }
+            },
+            methods: {
+                changeData: function() {
+                    vm.obj.name = 'cindy';
+                    vm.$set(vm.obj.list, 0, 3);
+                }
+            },
+            watch: {
+                'obj.name': function() {
+                    console.log(vm.obj);
+                },
+                'obj.list': function() {
+                    console.log(vm.obj);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

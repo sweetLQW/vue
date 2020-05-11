@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ $store.state.a.num }}</p>
+        <p>{{ $store.state.b.num }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script>
+        const moduleA = {
+            state: () => ({ num: 0 }),
+            mutations:{},
+            actions:{},
+            getters:{}
+        };
+        const moduleB = {
+            state: () => ({ num: 1 }),
+            mutations:{},
+            actions:{},
+            getters:{}
+        };
+        const store = new Vuex.Store({
+            modules: {
+                a: moduleA,
+                b: moduleB
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            store
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隔代组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <p>name: {{ name }}</p>
+        <p>age: {{ age }}</p>
+        <com-child :name="name" :age="age" @update="updateData"></com-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var comChildChild = {
+            template: `<p>com-child-child: {{ $attrs }}</p>`,
+            created: function() {
+                console.log('com-child-child继承的参数:', this.$attrs);
+                console.log('com-child-child继承的事件:', this.$listeners);
+                // 孙子组件中修改name，同步给父组件
+                this.$attrs.name = 'cindy';
+                this.$emit('update', 'name', this.$attrs.name);
+            }
+        }
+
+        var comChild = {
+            template: `
+                <div class="child">
+                    <p>com-child: {{ $attrs }}</p>
+                    <com-child-child 
+                        v-bind="$attrs" 
+                        v-on="$listeners">
+                    </com-child-child>
+                </div>
+            `,
+            components: { comChildChild },
+            created: function() {
+                console.log('com-child继承的参数:', this.$attrs);
+                console.log('com-child继承的事件:', this.$listeners);
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'lily',
+                age: 25
+            },
+            methods: {
+                updateData: function(key, value) {
+                    this[key] = value;
+                }
+            },
+            components: { comChild }
+        })
+        
+    </script>
+</body>
+</html>

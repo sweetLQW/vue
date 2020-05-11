@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子、兄弟、隔代组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <p>父组件中的value：{{ value }}</p>
+        <com-child :value="value"></com-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 空的vue实例作为事件中心，$emit用来触发事件，$on用来监听事件
+        var Event = new Vue();
+
+        var comChild = {
+            props: ['value'],
+            template: `
+                <div class="child">
+                    <p>子组件中的value：{{ childValue }}</p>
+                    <button @click="changeValue()">点击我</button>
+                </div>
+            `,
+            data: function() {
+                return {
+                    childValue: this.value
+                }
+            },
+            methods: {
+                changeValue: function() {
+                    this.childValue++;
+                    Event.$emit('value-changed', this.childValue);
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                value: 0
+            },
+            components: {
+                'com-child': comChild
+            },
+            created: function() {
+                Event.$on('value-changed', data => {
+                    this.value = data;
+                })
+            }
+        })
+        
+    </script>
+</body>
+</html>

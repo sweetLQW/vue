@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue - 过滤器</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ list | filterList }}</p>
+        <p>{{ num | filterNum(1, 2) }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num: 0,
+                list: [
+                    { name: 'lily', age: 25},
+                    { name: 'cindy', age: 18},
+                    { name: 'sunny', age: 21}
+                ]
+            },
+            filters: {
+                filterList: function(data) {
+                    return data.filter((ele) => ele.age > 20);
+                },
+                filterNum: function(data, arg1, arg2) {
+                    console.log(arg1, arg2)
+                    return data + arg1 + arg2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

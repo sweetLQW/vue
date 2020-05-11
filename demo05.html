@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 与 Style 绑定</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p class="title" :class="{ 'active': isActive, 'a': isA }">class绑定 - 对象</p>
+        <p class="title" :class="[class1, class2]">class绑定 - 数组</p>
+        <p class="title" :class="[isActive ? 'active' : '', class2]">class绑定 - 数组中应用表达式</p>
+        <p class="title" :class="[{ 'active': isActive }, class2]">class绑定 - 数组中应用对象</p>
+
+        <button @click="changeActive()">点击我，切换active</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                isA: true,
+                class1: 'class1',
+                class2: 'class2'
+            },
+            methods: {
+                changeActive: function() {
+                    vm.isActive = !vm.isActive;
+                }
+            },
+        }) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期钩子</title>
+</head>
+<body>
+    <div id="app">
+        <p>我是默认html模板</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                num: 0
+            },
+            beforeCreate: function() {
+                console.log('------------------------------------');
+                console.log('beforeCreate钩子：');
+                console.log(this.num, this.$el);
+            },
+            created: function() {
+                console.log('------------------------------------');
+                console.log('created钩子：实例被创建之后执行');
+                console.log(this.num, this.$el);
+                // 会延迟到mounted执行
+                this.$nextTick(function() {
+                    console.log('nextTick开始执行');
+                    console.log(this.num, this.$el);
+                })
+            },
+            beforeMount: function() {
+                console.log('------------------------------------');
+                console.log('beforeMount钩子：');
+                console.log(this.num, this.$el);
+            },
+            mounted: function() {
+                console.log('------------------------------------');
+                console.log('mounted钩子：');
+                console.log(this.num, this.$el);
+            }
+        }) 
+    </script>
+</body>
+</html>

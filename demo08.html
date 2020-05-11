@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue父子组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <p>父组件中的value：{{ value }}</p>
+        <com-child :value="value" @value-changed="updateValue"></com-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var comChild = {
+            props: ['value'],
+            template: `
+                <div class="child">
+                    <p>子组件中的value：{{ childValue }}</p>
+                    <button @click="changeValue()">点击我</button>
+                </div>
+            `,
+            data: function() {
+                return {
+                    childValue: this.value
+                }
+            },
+            methods: {
+                changeValue: function() {
+                    this.childValue++;
+                    this.$emit('value-changed', this.childValue);
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                value: 0
+            },
+            methods: {
+                updateValue: function(newValue) {
+                    this.value = newValue;
+                }
+            },
+            components: {
+                'com-child': comChild
+            }
+        })
+        
+    </script>
+</body>
+</html>

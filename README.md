@@ -1,11 +1,20 @@
-## vue
-vue框架搭建及使用
-### 本地开发：npm run dev
-### 本地构建生产环境：npm run build
-#### 要点：
-1. vue(v2.5.17) + webpack(v4.20.2)
-2. 单入口文件
-3. css文件拆分出来 所有css都通过main.css引入
-4. 通过npm run dev 运行项目
-5. 通过npm run build 构建生产环境
-6. 使用axios进行数据请求
+# Vue学习案例
+##### vue-router
+##### vuex
+##### vue-project
+##### demo01 Vue基础
+##### demo02 Vue组件的应用
+##### demo03 Vue生命周期钩子
+##### demo04 计算属性与监听器
+##### demo05 Class 与 Style 绑定
+##### demo06 条件渲染
+##### demo07 列表渲染
+##### demo08 Vue父子组件通信
+##### demo09 父子、兄弟、隔代组件通信
+##### demo10 隔代组件通信
+##### demo11 隔代组件通信（向下传值）
+##### demo12 父子组件通信 ($refs / $children / $parent)
+##### demo13 Vue - 父组件监听子组件的生命周期钩子函数
+##### demo14 Vue - 父组件监听子组件的生命周期钩子函数-@hook（二）
+##### demo15 vue - 监听某个属性值的变化
+##### demo16 vue - 过滤器

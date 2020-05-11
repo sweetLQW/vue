@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue-router</title>
+</head>
+<body>
+    <div id="app">
+        <h4>router-link</h4>
+        <ul>
+            <li>使用 router-link 组件来导航</li>
+            <li>通过传入 `to` 属性指定链接</li>
+            <li>router-link 默认会被渲染成一个 a 标签</li>
+        </ul>
+        <br>
+        <router-link to="/a">go to A.page</router-link>
+        <br>
+        <router-link to="/b">go to B.page</router-link>
+        <br>
+        <h4>下面是路由页面</h4>
+        <button @click="goBack()">返回上一级</button>
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        const A = { template: "<h4>A page</h4>"};
+        const B = { template: "<h4>B page</h4>"};
+
+        const router = new VueRouter({
+            routes: [
+                { path: '/a', component: A },
+                { path: '/b', component: B }
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            router,
+            methods: {
+                goBack: function() {
+                    this.$router.go(-1);
+                }
+            },
+            created: function() {
+                // 路由器
+                console.log(this.$router);
+                // 当前路由
+                console.log(this.$route);
+            }
+        })
+
+    </script>
+</body>
+</html>

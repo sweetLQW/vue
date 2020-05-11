@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ $store.getters.filterListLen }}</p>
+        <ul>
+            <li v-for="item in $store.getters.filterList">name：{{ item.name }}</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                num: 0,
+                value: 1,
+                list: [
+                    {name: 'lily', age: 25},
+                    {name: 'cindy', age: 18},
+                    {name: 'sunny', age: 21},
+                ]
+            },
+            getters: {
+                filterList: state => {
+                    return state.list.filter(ele => ele.age > 20);
+                },
+                // 第二个参数getters
+                filterListLen: (state, getters) => getters.filterList.length
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            store
+        })
+    </script>
+</body>
+</html>

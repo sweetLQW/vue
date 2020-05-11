@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue基础</title>
+</head>
+<body>
+    <div id="app">
+        <h2>一、Vue基本应用</h2>
+        <!-- 绑定属性使用v-bind:属性名="变量名|js表达式" & 直接插入变量使用{{ 变量名|js表达式 }} -->
+        <h3 v-bind:title="msg">{{ msg }}</h3>
+        <!-- 简写模式 -->
+        <h3 :title="msg">{{ msg }}</h3>
+        <!-- 使用表达式 -->
+        <h2>{{ msg + 'h2' }}</h2>
+
+        <!-- 条件语句 v-if="变量名|number|boolean|null|undefined|js表达式" -->
+        <p v-if="bool">条件语句</p>
+        <p v-else>条件语句</p>
+
+        <!-- 循环语句 -->
+        <ul>
+            <li v-for="item in list">{{ item }}</li>
+        </ul>
+
+        <!-- 事件监听器 -->
+        <button v-on:click="clickFun()">点击我，查看控制台</button>
+        <!-- 简写模式 -->
+        <button @click="clickFun()">点击我，查看控制台</button>
+
+        <!-- 表单输入和应用状态之间的双向绑定 -->
+        <input type="text" v-model="inputMsg">
+        <br>
+        <br>
+
+        <h2>二、Vue2.6.0更新内容</h2>
+        <!-- 从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数 -->
+        <!-- 注意：
+            1. attrName及eventName都会被转化成小写字母，所以data中变量名需要使用小写来定义 
+            2. []内不能出现空格或引号，会触发编译警告
+        -->
+        <h3 v-bind:[attrName]="msg">属性名使用变量</h3>
+        <button v-on:[eventName]="clickFun()">点击我，查看控制台</button>
+
+    </div>
+
+    <!-- 直接引入 - 开发版本 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                attrname: 'title',
+                eventname: 'click',
+                msg: 'Vue是一套用于构建用户界面的渐进式框架',
+                bool: true,
+                list: [1, 2, 3, 4],
+                inputMsg: '我是双向数据绑定'
+            },
+            methods: {
+                clickFun: function() {
+                    console.log('点击了');
+                }
+            }
+        })
+    </script>
+
+    <!-- ES Modules引入 - 开发版本 -->
+    <!-- <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+    </script> -->
+</body>
+</html>

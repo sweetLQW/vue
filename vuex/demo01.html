@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ $store.state.num }}</p>
+        <p>{{ value }}</p>
+        <button @click="changeNum()">点击num++</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                num: 0,
+                value: 1
+            },
+            mutations: {
+                addNum: function(state) {
+                    state.num++;
+                }
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            // 以下内容相当于store: store, 
+            // 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+            // 注入store后，可以使用this.$store访问
+            store,
+            methods: {
+                changeNum: function() {
+                    store.commit('addNum');
+                    console.log(store.state.num);
+                    console.log(this.$store.state.num);
+                }
+            },
+            computed: {
+                'value': function() {
+                    return store.state.value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

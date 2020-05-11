@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuex</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ $store.state.num }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                num: 0,
+                value: 1
+            },
+            mutations: {
+                addNum: function(state) {
+                    state.num++;
+                }
+            },
+            actions: {
+                increment (context) {
+                    setTimeout(function() {
+                        context.commit('addNum');
+                    }, 2000);
+                }
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            store,
+            mounted: function() {
+                this.$store.dispatch('increment');
+            }
+        })
+
+    </script>
+</body>
+</html>
