@@ -5,13 +5,11 @@
 </template>
 
 <script>
-  import {
-    fun
-  } from '@/js/common.js';
+  import { fun } from '@/js/common.js';
   export default {
     data() {
       return {
-        str: 'test'
+        str: '欢迎来到Vue渐进式框架'
       }
     },
     created() {

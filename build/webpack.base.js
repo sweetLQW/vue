@@ -2,6 +2,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // const HTMLPlugin = require('html-webpack-plugin');
 // const webpack = require('webpack');
+// extract-text-webpack-plugin把css代码从js文件中抽离出来，单独生成模块
 const Ex = require('extract-text-webpack-plugin');
 
 function resolve(dir) {
