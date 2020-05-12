@@ -1,7 +1,6 @@
 # Vue学习案例
 ##### vue-router
 ##### vuex
-##### vue-project
 ##### demo01 Vue基础
 ##### demo02 Vue组件的应用
 ##### demo03 Vue生命周期钩子
